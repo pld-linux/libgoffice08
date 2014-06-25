@@ -1,0 +1,14 @@
+--- goffice-0.8.17/goffice/utils/regutf8.c.orig	2009-09-06 01:52:09.000000000 +0200
++++ goffice-0.8.17/goffice/utils/regutf8.c	2014-06-24 12:29:33.076546706 +0200
+@@ -155,7 +155,10 @@
+ 		default: return GO_REG_BADPAT;
+ 		}
+ 	} else {
+-		gor->re_nsub = pcre_info (r, NULL, NULL);
++		int pcre_info_result;
++		pcre_info_result = pcre_fullinfo (r, NULL, PCRE_INFO_CAPTURECOUNT, &gor->re_nsub);
++		if (pcre_info_result != 0)
++			gor->re_nsub = pcre_info_result;
+ 		gor->nosub = (cflags & GO_REG_NOSUB) != 0;
+ 		return 0;
+ 	}
