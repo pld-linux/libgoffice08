@@ -83,7 +83,7 @@ Dokumentacja API biblioteki GOffice.
 
 %prep
 %setup -qn %{orgname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__gtkdocize}
